@@ -12,105 +12,67 @@ export default function Liste({ dark, kayitlar, onEdit, onDelete }) {
 
   if (kayitlar.length === 0) {
     return (
-      <div style={{ textAlign: "center", padding: "60px 24px", opacity: 0.4 }}>
-        <div style={{ fontSize: 64, marginBottom: 16 }}>🗺️</div>
-        <div style={{ fontSize: 18, fontWeight: 600 }}>Henüz kayıt yok</div>
-        <div style={{ fontSize: 14, marginTop: 6 }}>İlk seyahatini yukarıdan ekle</div>
+      <div className="max-w-6xl mx-auto px-6 mt-16 pb-20 text-center">
+        <div className="text-6xl mb-4">🗺️</div>
+        <p className="text-purple-300/40 text-lg font-semibold">Henüz kayıt yok</p>
+        <p className="text-purple-300/30 text-sm mt-1">İlk seyahatini yukarıdan ekle</p>
       </div>
     );
   }
 
   return (
-    <div style={{ maxWidth: 1100, margin: "60px auto 0", padding: "0 24px 60px" }}>
+    <div className="max-w-6xl mx-auto px-6 mt-16 pb-20">
 
       {/* Başlık + Arama */}
-      <div style={{
-        display: "flex",
-        justifyContent: "space-between",
-        alignItems: "center",
-        marginBottom: 24,
-        flexWrap: "wrap",
-        gap: 16,
-      }}>
+      <div className="flex flex-wrap justify-between items-end gap-4 mb-7">
         <div>
-          <h2 style={{
-            fontFamily: "'Syne', sans-serif",
-            fontSize: 28,
-            fontWeight: 800,
-            margin: 0,
-          }}>
-            Kayıtlar
-          </h2>
-          <p style={{ margin: "4px 0 0", opacity: 0.5, fontSize: 14 }}>
-            {kayitlar.length} seyahat kaydedildi
-          </p>
+          <h2 className="text-3xl font-extrabold text-white font-display tracking-tight">Kayıtlar</h2>
+          <p className="text-purple-300/50 text-sm mt-1">{kayitlar.length} seyahat kaydedildi</p>
         </div>
         <input
-          className="field-input"
-          placeholder="🔍  Kayıtlarda ara..."
+          className="w-64 px-4 py-2.5 rounded-xl border border-violet-500/30 bg-white/5 text-purple-100 placeholder-purple-400/40 text-sm outline-none focus:border-violet-400 focus:ring-2 focus:ring-violet-500/20 transition-all backdrop-blur-sm"
+          placeholder="🔍 Kayıtlarda ara..."
           value={search}
           onChange={e => setSearch(e.target.value)}
-          style={{ maxWidth: 260 }}
         />
       </div>
 
-      {/* İstatistik Kartları */}
-      <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 16, marginBottom: 28 }}>
+      {/* İstatistik kartları */}
+      <div className="grid grid-cols-3 gap-4 mb-8">
         {[
           { label: "Toplam Kayıt", value: kayitlar.length, icon: "📋" },
           { label: "Ülke Sayısı", value: new Set(kayitlar.map(k => k.ulke)).size, icon: "🌍" },
           { label: "Şehir Sayısı", value: new Set(kayitlar.map(k => k.sehir)).size, icon: "🏙️" },
         ].map(({ label, value, icon }) => (
-          <div key={label} style={{
-            background: dark ? "rgba(139,92,246,0.08)" : "rgba(139,92,246,0.06)",
-            border: `1px solid ${dark ? "rgba(139,92,246,0.2)" : "rgba(139,92,246,0.12)"}`,
-            borderRadius: 16,
-            padding: "20px 24px",
-            backdropFilter: "blur(10px)",
-          }}>
-            <div style={{ fontSize: 28, marginBottom: 6 }}>{icon}</div>
-            <div style={{ fontFamily: "'Syne', sans-serif", fontSize: 32, fontWeight: 800, color: "#a855f7" }}>{value}</div>
-            <div style={{ fontSize: 13, opacity: 0.6, marginTop: 2 }}>{label}</div>
+          <div
+            key={label}
+            className="rounded-2xl border border-violet-500/20 bg-violet-500/[0.07] backdrop-blur-sm px-6 py-5 hover:border-violet-400/40 transition-all duration-200"
+          >
+            <div className="text-2xl mb-2">{icon}</div>
+            <div className="text-3xl font-extrabold text-violet-400 font-display">{value}</div>
+            <div className="text-xs text-purple-300/50 mt-1 font-medium">{label}</div>
           </div>
         ))}
       </div>
 
       {/* Tablo */}
-      <div style={{
-        background: dark ? "rgba(255,255,255,0.03)" : "rgba(255,255,255,0.6)",
-        backdropFilter: "blur(20px)",
-        borderRadius: 20,
-        border: `1.5px solid ${dark ? "rgba(139,92,246,0.15)" : "rgba(139,92,246,0.12)"}`,
-        overflow: "hidden",
-        boxShadow: dark ? "0 10px 40px rgba(0,0,0,0.3)" : "0 10px 40px rgba(139,92,246,0.08)",
-      }}>
+      <div className="rounded-2xl border border-violet-500/20 bg-white/[0.02] backdrop-blur-xl overflow-hidden shadow-2xl shadow-black/30">
 
-        {/* Tablo Başlığı */}
-        <div style={{
-          display: "grid",
-          gridTemplateColumns: "1fr 1fr 1fr 1fr 1.5fr 1fr 100px",
-          padding: "14px 24px",
-          background: dark ? "rgba(139,92,246,0.12)" : "rgba(139,92,246,0.08)",
-          borderBottom: `1px solid ${dark ? "rgba(139,92,246,0.2)" : "rgba(139,92,246,0.12)"}`,
-          fontSize: 12,
-          fontWeight: 700,
-          letterSpacing: 0.8,
-          textTransform: "uppercase",
-          opacity: 0.7,
-          gap: 8,
-        }}>
+        {/* Tablo başlığı */}
+        <div className="grid gap-2 px-6 py-3.5 bg-violet-500/10 border-b border-violet-500/15 text-[11px] font-bold uppercase tracking-widest text-purple-300/60"
+          style={{ gridTemplateColumns: "1fr 1fr 1fr 1fr 1.6fr 1fr 90px" }}>
           <div>Ad</div>
           <div>Soyad</div>
           <div>Ülke</div>
           <div>Şehir</div>
           <div>E-posta</div>
           <div>Tarih</div>
-          <div style={{ textAlign: "center" }}>İşlem</div>
+          <div className="text-center">İşlem</div>
         </div>
 
-        {/* Boş arama sonucu */}
+        {/* Boş sonuç */}
         {filtered.length === 0 && (
-          <div style={{ padding: "40px", textAlign: "center", opacity: 0.4 }}>
+          <div className="py-12 text-center text-purple-300/30 text-sm">
             Arama sonucu bulunamadı
           </div>
         )}
@@ -119,47 +81,33 @@ export default function Liste({ dark, kayitlar, onEdit, onDelete }) {
         {filtered.map((k, i) => (
           <div
             key={k.id}
-            className="card-row"
-            style={{
-              display: "grid",
-              gridTemplateColumns: "1fr 1fr 1fr 1fr 1.5fr 1fr 100px",
-              padding: "16px 24px",
-              borderBottom: i < filtered.length - 1
-                ? `1px solid ${dark ? "rgba(139,92,246,0.08)" : "rgba(139,92,246,0.06)"}`
-                : "none",
-              alignItems: "center",
-              gap: 8,
-            }}
+            className={`grid gap-2 px-6 py-4 items-center hover:bg-violet-500/[0.04] transition-all duration-150 ${
+              i < filtered.length - 1 ? "border-b border-violet-500/10" : ""
+            }`}
+            style={{ gridTemplateColumns: "1fr 1fr 1fr 1fr 1.6fr 1fr 90px" }}
           >
-            <div style={{ fontSize: 15, fontWeight: 500 }}>{k.ad}</div>
-            <div style={{ fontSize: 15 }}>{k.soyad}</div>
+            <div className="text-sm font-semibold text-purple-100">{k.ad}</div>
+            <div className="text-sm text-purple-200/80">{k.soyad}</div>
             <div>
-              <span style={{
-                background: dark ? "rgba(139,92,246,0.15)" : "rgba(139,92,246,0.1)",
-                border: `1px solid ${dark ? "rgba(139,92,246,0.25)" : "rgba(139,92,246,0.2)"}`,
-                borderRadius: 6,
-                padding: "2px 8px",
-                fontSize: 13,
-                color: dark ? "#c4b5fd" : "#7c3aed",
-              }}>{k.ulke}</span>
+              <span className="inline-block px-2.5 py-0.5 rounded-md text-xs font-medium bg-violet-500/15 border border-violet-500/25 text-violet-300">
+                {k.ulke}
+              </span>
             </div>
-            <div style={{ fontSize: 14, opacity: 0.8 }}>{k.sehir}</div>
-            <div style={{ fontSize: 13, opacity: 0.65, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
-              {k.eposta}
-            </div>
-            <div style={{ fontSize: 13, opacity: 0.6 }}>{k.tarih}</div>
+            <div className="text-sm text-purple-200/70">{k.sehir}</div>
+            <div className="text-xs text-purple-300/50 truncate">{k.eposta}</div>
+            <div className="text-xs text-purple-300/50">{k.tarih}</div>
 
-            {/* Düzenle / Sil */}
-            <div style={{ display: "flex", gap: 6, justifyContent: "center" }}>
+            {/* İşlem butonları */}
+            <div className="flex gap-1.5 justify-center">
               {deleteConfirm === k.id ? (
-                <div style={{ display: "flex", gap: 4 }}>
+                <div className="flex gap-1">
                   <button
                     onClick={() => { onDelete(k.id); setDeleteConfirm(null); }}
-                    style={{ background: "#dc2626", border: "none", borderRadius: 6, padding: "4px 8px", color: "white", cursor: "pointer", fontSize: 12 }}
+                    className="px-2.5 py-1 rounded-lg bg-red-500 hover:bg-red-400 text-white text-xs font-bold transition-colors"
                   >Sil</button>
                   <button
                     onClick={() => setDeleteConfirm(null)}
-                    style={{ background: "transparent", border: "1px solid rgba(139,92,246,0.3)", borderRadius: 6, padding: "4px 8px", color: dark ? "#a78bfa" : "#7c3aed", cursor: "pointer", fontSize: 12 }}
+                    className="px-2.5 py-1 rounded-lg border border-violet-500/30 text-violet-300 text-xs font-semibold hover:bg-violet-500/10 transition-colors"
                   >İptal</button>
                 </div>
               ) : (
@@ -167,30 +115,12 @@ export default function Liste({ dark, kayitlar, onEdit, onDelete }) {
                   <button
                     onClick={() => onEdit(k)}
                     title="Düzenle"
-                    style={{
-                      background: dark ? "rgba(139,92,246,0.15)" : "rgba(139,92,246,0.1)",
-                      border: `1px solid ${dark ? "rgba(139,92,246,0.25)" : "rgba(139,92,246,0.2)"}`,
-                      borderRadius: 8,
-                      width: 32, height: 32,
-                      cursor: "pointer",
-                      fontSize: 14,
-                      display: "flex", alignItems: "center", justifyContent: "center",
-                      transition: "all 0.2s",
-                    }}
+                    className="w-8 h-8 rounded-lg flex items-center justify-center text-sm bg-violet-500/15 border border-violet-500/25 hover:bg-violet-500/25 hover:border-violet-400/50 transition-all duration-150"
                   >✏️</button>
                   <button
                     onClick={() => setDeleteConfirm(k.id)}
                     title="Sil"
-                    style={{
-                      background: "rgba(239,68,68,0.1)",
-                      border: "1px solid rgba(239,68,68,0.2)",
-                      borderRadius: 8,
-                      width: 32, height: 32,
-                      cursor: "pointer",
-                      fontSize: 14,
-                      display: "flex", alignItems: "center", justifyContent: "center",
-                      transition: "all 0.2s",
-                    }}
+                    className="w-8 h-8 rounded-lg flex items-center justify-center text-sm bg-red-500/10 border border-red-500/20 hover:bg-red-500/20 hover:border-red-400/40 transition-all duration-150"
                   >🗑️</button>
                 </>
               )}

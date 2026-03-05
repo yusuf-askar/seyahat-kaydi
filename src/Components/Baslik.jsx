@@ -1,70 +1,39 @@
 export default function Baslik({ dark, setDark }) {
   return (
-    <div style={{ position: "relative", zIndex: 10 }}>
-      <div style={{
-        maxWidth: 1100,
-        margin: "0 auto",
-        padding: "28px 24px 0",
-        display: "flex",
-        justifyContent: "space-between",
-        alignItems: "center",
-      }}>
+    <header className="relative z-10">
+      {/* Navbar */}
+      <div className="max-w-6xl mx-auto px-6 pt-7 flex justify-between items-center">
         {/* Logo */}
-        <div style={{ display: "flex", alignItems: "center", gap: 14 }}>
-          <div style={{
-            width: 44, height: 44,
-            borderRadius: 14,
-            background: "linear-gradient(135deg, #7c3aed, #c084fc)",
-            display: "flex", alignItems: "center", justifyContent: "center",
-            fontSize: 22,
-            boxShadow: "0 4px 16px rgba(139,92,246,0.4)",
-          }}>✈️</div>
+        <div className="flex items-center gap-3">
+          <div className="w-11 h-11 rounded-2xl bg-gradient-to-br from-violet-600 to-purple-400 flex items-center justify-center text-xl shadow-lg shadow-violet-500/40">
+            ✈️
+          </div>
           <div>
-            <div style={{
-              fontFamily: "'Syne', sans-serif",
-              fontSize: 22,
-              fontWeight: 800,
-              letterSpacing: -0.5,
-              lineHeight: 1,
-            }}>
+            <p className="font-extrabold text-xl tracking-tight leading-none text-white font-display">
               Seyahat Kayıt
-            </div>
-            <div style={{ fontSize: 12, opacity: 0.5, marginTop: 2 }}>
-              Seyahat Kayıt Sistemi
-            </div>
+            </p>
+            <p className="text-xs text-purple-300/60 mt-0.5">Seyahat Kayıt Sistemi</p>
           </div>
         </div>
 
-        {/* Dark/Light Toggle */}
-        <button className="toggle-btn" onClick={() => setDark(!dark)}>
+        {/* Tema butonu */}
+        <button
+          onClick={() => setDark(!dark)}
+          className="flex items-center gap-2 px-5 py-2 rounded-full border border-violet-500/40 bg-violet-500/10 hover:bg-violet-500/20 text-purple-300 text-sm font-semibold transition-all duration-200"
+        >
           {dark ? "☀️" : "🌙"} {dark ? "Açık Tema" : "Koyu Tema"}
         </button>
       </div>
 
       {/* Hero başlık */}
-      <div style={{
-        maxWidth: 1100,
-        margin: "0 auto",
-        padding: "40px 24px 0",
-        textAlign: "center",
-      }}>
-        <h1 style={{
-          fontFamily: "'Syne', sans-serif",
-          fontSize: "clamp(32px, 6vw, 60px)",
-          fontWeight: 800,
-          lineHeight: 1.1,
-          margin: 0,
-          background: "linear-gradient(135deg, #c084fc, #a855f7, #7c3aed)",
-          WebkitBackgroundClip: "text",
-          WebkitTextFillColor: "transparent",
-          backgroundClip: "text",
-        }}>
+      <div className="max-w-6xl mx-auto px-6 pt-12 pb-2 text-center">
+        <h1 className="text-5xl md:text-7xl font-extrabold tracking-tight leading-none font-display bg-gradient-to-r from-purple-300 via-violet-400 to-fuchsia-400 bg-clip-text text-transparent">
           Seyahatini Kaydet
         </h1>
-        <p style={{ fontSize: 16, opacity: 0.55, marginTop: 12, marginBottom: 0 }}>
-          
+        <p className="text-purple-300/50 mt-4 text-base">
+          Gittiğin yerleri kayıt altına al, geçmişine bak
         </p>
       </div>
-    </div>
+    </header>
   );
 }
