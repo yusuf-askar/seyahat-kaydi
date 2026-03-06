@@ -1,5 +1,5 @@
-import AnaSayfa from './Pages/AnaSayfa'
+import HomePage from './Pages/HomePage'
 
 export default function App() {
-  return <AnaSayfa />
+  return <HomePage />
 }
